@@ -5,6 +5,8 @@ ARCHIVO_DATOS = "data/conexiones_alemania.csv"
 
 
 def cargar_conexiones(nombre_archivo):
+    # Lee el archivo CSV y transforma cada fila en una conexion del grafo.
+    # Cada conexion queda guardada como: origen, destino, distancia y fuente.
     conexiones = []
 
     with open(nombre_archivo, newline="", encoding="utf-8") as archivo:
@@ -21,6 +23,9 @@ def cargar_conexiones(nombre_archivo):
 
 
 def crear_grafo(conexiones):
+    # Representa el grafo como un diccionario de listas de adyacencia.
+    # Como las carreteras se consideran bidireccionales, cada arista se agrega en ambos sentidos.
+    # Ejemplo: grafo["Berlin"] contiene sus ciudades vecinas y la distancia hacia cada una.
     grafo = {}
 
     for origen, destino, distancia, fuente in conexiones:
@@ -36,6 +41,7 @@ def crear_grafo(conexiones):
 
 
 def obtener_tamano_grafo(grafo):
+    # En un grafo no dirigido cada arista queda guardada dos veces.
     cantidad_aristas_repetidas = 0
 
     for ciudad in grafo:
@@ -45,6 +51,8 @@ def obtener_tamano_grafo(grafo):
 
 
 def verificar_conexo(grafo):
+    # Recorre el grafo desde una ciudad inicial para comprobar si todas son alcanzables.
+    # Si al final se visitaron todas las ciudades, entonces el grafo es conexo.
     ciudades = list(grafo.keys())
     pendientes = [ciudades[0]]
     visitados = set()
@@ -63,6 +71,7 @@ def verificar_conexo(grafo):
 
 
 def buscar_ciudad_menor_distancia(distancias, visitados):
+    # Selecciona la ciudad no visitada con la menor distancia acumulada.
     ciudad_menor = None
     distancia_menor = float("inf")
 
@@ -75,10 +84,14 @@ def buscar_ciudad_menor_distancia(distancias, visitados):
 
 
 def dijkstra(grafo, origen, destino):
+    # Calcula el camino de menor distancia desde origen hasta destino.
+    # distancias guarda el menor costo conocido para llegar a cada ciudad.
+    # anteriores permite reconstruir la ruta una vez terminado el algoritmo.
     distancias = {}
     anteriores = {}
     visitados = set()
 
+    # Al inicio todas las distancias son infinitas, excepto la ciudad de origen.
     for ciudad in grafo:
         distancias[ciudad] = float("inf")
         anteriores[ciudad] = None
@@ -88,14 +101,18 @@ def dijkstra(grafo, origen, destino):
     while len(visitados) < len(grafo):
         ciudad_actual = buscar_ciudad_menor_distancia(distancias, visitados)
 
+        # Si no queda ninguna ciudad alcanzable, se termina el algoritmo.
         if ciudad_actual is None:
             break
 
+        # Cuando se llega al destino, ya se encontro su distancia minima.
         if ciudad_actual == destino:
             break
 
         visitados.add(ciudad_actual)
 
+        # Relajacion de aristas: se actualiza la distancia si aparece un camino mas corto.
+        # Si conviene pasar por ciudad_actual para llegar a un vecino, se guarda esa mejora.
         for vecino, peso in grafo[ciudad_actual]:
             nueva_distancia = distancias[ciudad_actual] + peso
 
@@ -108,6 +125,8 @@ def dijkstra(grafo, origen, destino):
 
 
 def reconstruir_ruta(anteriores, origen, destino):
+    # Reconstruye la ruta retrocediendo desde el destino hasta el origen.
+    # Por eso al final se invierte la lista para mostrarla en el orden correcto.
     ruta = []
     ciudad_actual = destino
 
@@ -124,6 +143,7 @@ def reconstruir_ruta(anteriores, origen, destino):
 
 
 def mostrar_ciudades(grafo):
+    # Muestra las ciudades disponibles para que el usuario escriba una opcion valida.
     print("Ciudades disponibles:")
 
     for ciudad in sorted(grafo):
@@ -131,6 +151,7 @@ def mostrar_ciudades(grafo):
 
 
 def mostrar_resumen_grafo(grafo):
+    # Presenta propiedades basicas del grafo relacionadas con la teoria vista en clases.
     orden = len(grafo)
     tamano = obtener_tamano_grafo(grafo)
 
@@ -146,6 +167,8 @@ def mostrar_resumen_grafo(grafo):
 
 
 def ejecutar_programa():
+    # Flujo principal de la version por consola.
+    # Carga datos, muestra informacion del grafo, pide ciudades y entrega el resultado.
     conexiones = cargar_conexiones(ARCHIVO_DATOS)
     grafo = crear_grafo(conexiones)
 
