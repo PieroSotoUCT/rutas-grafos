@@ -1,0 +1,26 @@
+origen,destino,distancia_km,criterio,fuente,url_fuente,fecha_consulta
+Berlin,Hamburg,289,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.5200%2C13.4050%3B53.5511%2C9.9937",2026-06-20
+Berlin,Leipzig,189,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.5200%2C13.4050%3B51.3397%2C12.3731",2026-06-20
+Berlin,Dresden,191,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.5200%2C13.4050%3B51.0504%2C13.7373",2026-06-20
+Berlin,Hannover,290,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.5200%2C13.4050%3B52.3759%2C9.7320",2026-06-20
+Hamburg,Bremen,126,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=53.5511%2C9.9937%3B53.0793%2C8.8017",2026-06-20
+Hamburg,Hannover,150,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=53.5511%2C9.9937%3B52.3759%2C9.7320",2026-06-20
+Bremen,Hannover,128,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=53.0793%2C8.8017%3B52.3759%2C9.7320",2026-06-20
+Hannover,Dortmund,213,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.3759%2C9.7320%3B51.5136%2C7.4653",2026-06-20
+Hannover,Leipzig,266,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.3759%2C9.7320%3B51.3397%2C12.3731",2026-06-20
+Dortmund,Essen,37,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.5136%2C7.4653%3B51.4556%2C7.0116",2026-06-20
+Dortmund,Dusseldorf,68,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.5136%2C7.4653%3B51.2277%2C6.7735",2026-06-20
+Essen,Dusseldorf,35,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.4556%2C7.0116%3B51.2277%2C6.7735",2026-06-20
+Dusseldorf,Cologne,41,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.2277%2C6.7735%3B50.9375%2C6.9603",2026-06-20
+Cologne,Frankfurt,190,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=50.9375%2C6.9603%3B50.1109%2C8.6821",2026-06-20
+Frankfurt,Mannheim,84,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=50.1109%2C8.6821%3B49.4875%2C8.4660",2026-06-20
+Mannheim,Stuttgart,133,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=49.4875%2C8.4660%3B48.7758%2C9.1829",2026-06-20
+Stuttgart,Nuremberg,210,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=48.7758%2C9.1829%3B49.4521%2C11.0767",2026-06-20
+Nuremberg,Munich,170,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=49.4521%2C11.0767%3B48.1351%2C11.5820",2026-06-20
+Leipzig,Dresden,113,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.3397%2C12.3731%3B51.0504%2C13.7373",2026-06-20
+Leipzig,Nuremberg,283,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.3397%2C12.3731%3B49.4521%2C11.0767",2026-06-20
+Dresden,Nuremberg,313,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=51.0504%2C13.7373%3B49.4521%2C11.0767",2026-06-20
+Frankfurt,Nuremberg,223,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=50.1109%2C8.6821%3B49.4521%2C11.0767",2026-06-20
+Frankfurt,Stuttgart,205,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=50.1109%2C8.6821%3B48.7758%2C9.1829",2026-06-20
+Cologne,Dortmund,94,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=50.9375%2C6.9603%3B51.5136%2C7.4653",2026-06-20
+Munich,Stuttgart,221,distancia por carretera,OpenStreetMap Directions con motor OSRM,"https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=48.1351%2C11.5820%3B48.7758%2C9.1829",2026-06-20
