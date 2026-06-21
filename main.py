@@ -12,6 +12,8 @@ from src.ruta_minima import (
 
 
 POSICIONES = {
+    # Coordenadas manuales para ubicar las ciudades dentro del canvas.
+    # No son coordenadas geograficas reales; sirven para visualizar el grafo de forma clara.
     "Hamburg": (260, 70),
     "Bremen": (160, 140),
     "Hannover": (280, 170),
@@ -30,6 +32,7 @@ POSICIONES = {
 }
 
 COLORES = {
+    # Paleta usada por la interfaz grafica.
     "fondo": "#fff7df",
     "panel": "#fff1f1",
     "mapa": "#fffaf0",
@@ -47,6 +50,7 @@ COLORES = {
 
 
 def obtener_aristas_ruta(ruta):
+    # Convierte la secuencia de ciudades en un conjunto de aristas para poder resaltarlas.
     aristas = set()
 
     for i in range(len(ruta) - 1):
@@ -56,9 +60,12 @@ def obtener_aristas_ruta(ruta):
 
 
 def dibujar_grafo(canvas, grafo, ruta):
+    # Redibuja todo el grafo y resalta las ciudades/aristas que pertenecen a la ruta minima.
+    # Se llama al iniciar, al calcular una ruta y al limpiar la seleccion.
     canvas.delete("all")
     aristas_ruta = obtener_aristas_ruta(ruta)
 
+    # Primero se dibujan las aristas para que los nodos queden encima.
     for ciudad in grafo:
         x1, y1 = POSICIONES[ciudad]
 
@@ -68,6 +75,7 @@ def dibujar_grafo(canvas, grafo, ruta):
                 arista = frozenset([ciudad, vecino])
 
                 if arista in aristas_ruta:
+                    # Las aristas de la ruta optima se muestran mas gruesas y en amarillo.
                     color = COLORES["ruta"]
                     ancho = 4
                 else:
@@ -77,6 +85,7 @@ def dibujar_grafo(canvas, grafo, ruta):
                 canvas.create_line(x1, y1, x2, y2, fill=color, width=ancho)
 
                 if arista in aristas_ruta:
+                    # Solo se muestran los pesos sobre las aristas usadas en la ruta seleccionada.
                     canvas.create_text(
                         (x1 + x2) / 2,
                         (y1 + y2) / 2 - 8,
@@ -85,10 +94,12 @@ def dibujar_grafo(canvas, grafo, ruta):
                         font=("Segoe UI", 8, "bold"),
                     )
 
+    # Luego se dibujan los nodos y sus etiquetas.
     for ciudad in grafo:
         x, y = POSICIONES[ciudad]
 
         if ciudad in ruta:
+            # Las ciudades que pertenecen a la ruta se diferencian del resto.
             relleno = COLORES["ruta"]
             radio = 18
         else:
@@ -121,9 +132,11 @@ def dibujar_grafo(canvas, grafo, ruta):
 
 
 def calcular(grafo, canvas, origen_var, destino_var, resultado_var):
+    # Obtiene las ciudades seleccionadas y calcula la ruta minima entre ellas.
     origen = origen_var.get()
     destino = destino_var.get()
 
+    # Los textos por defecto del combobox no son ciudades reales del grafo.
     if origen not in grafo or destino not in grafo:
         resultado_var.set("Selecciona una ciudad de origen y una ciudad de destino.")
         dibujar_grafo(canvas, grafo, [])
@@ -136,6 +149,7 @@ def calcular(grafo, canvas, origen_var, destino_var, resultado_var):
 
     ruta, distancia = dijkstra(grafo, origen, destino)
 
+    # Si el grafo fuera desconexo, podria no existir ruta entre dos ciudades.
     if not ruta:
         resultado_var.set("No existe una ruta entre esas ciudades.")
         dibujar_grafo(canvas, grafo, [])
@@ -150,6 +164,7 @@ def calcular(grafo, canvas, origen_var, destino_var, resultado_var):
 
 
 def limpiar(canvas, grafo, origen_var, destino_var, resultado_var):
+    # Restablece los selectores y vuelve a mostrar el grafo sin ruta resaltada.
     origen_var.set("Selecciona el origen")
     destino_var.set("Selecciona el destino")
     resultado_var.set("Selecciona una ciudad de origen y una ciudad de destino.")
@@ -157,6 +172,8 @@ def limpiar(canvas, grafo, origen_var, destino_var, resultado_var):
 
 
 def crear_interfaz():
+    # Carga los datos, construye el grafo y prepara la ventana principal.
+    # Esta funcion concentra la construccion de todos los elementos visuales.
     conexiones = cargar_conexiones(ARCHIVO_DATOS)
     grafo = crear_grafo(conexiones)
     ciudades = sorted(grafo.keys())
@@ -170,6 +187,7 @@ def crear_interfaz():
     style.theme_use("clam")
     style.configure("TCombobox", padding=6)
 
+    # Franja superior con los colores de la bandera alemana.
     bandera = tk.Frame(ventana, bg=COLORES["fondo"], height=18)
     bandera.pack(fill="x")
     tk.Frame(bandera, bg=COLORES["negro"], height=6).pack(fill="x")
@@ -194,6 +212,7 @@ def crear_interfaz():
     )
     subtitulo.pack(anchor="w", padx=24, pady=(0, 14))
 
+    # El panel izquierdo contiene controles; el canvas derecho contiene el grafo.
     contenido = tk.Frame(ventana, bg=COLORES["fondo"])
     contenido.pack(fill="both", expand=True, padx=24, pady=(0, 24))
 
@@ -201,6 +220,7 @@ def crear_interfaz():
     panel.pack(side="left", fill="y", padx=(0, 16))
 
     canvas = tk.Canvas(
+        # El canvas es el espacio donde se dibujan nodos, aristas y ruta optima.
         contenido,
         width=740,
         height=680,
@@ -214,6 +234,7 @@ def crear_interfaz():
     destino_var = tk.StringVar(value="Selecciona el destino")
     resultado_var = tk.StringVar(value="Selecciona una ciudad de origen y una ciudad de destino.")
 
+    # Selectores de origen y destino.
     tk.Label(
         panel,
         text="Origen",
@@ -278,6 +299,7 @@ def crear_interfaz():
         font=("Segoe UI", 10),
     ).pack(anchor="w")
 
+    # Resumen calculado desde el grafo construido.
     resumen = "Orden |V|: " + str(len(grafo)) + "\n"
     resumen = resumen + "Tamano |E|: " + str(obtener_tamano_grafo(grafo)) + "\n"
     resumen = resumen + "Conexo: " + ("Si" if verificar_conexo(grafo) else "No")
